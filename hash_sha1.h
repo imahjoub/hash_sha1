@@ -105,7 +105,7 @@ private:
   static const std::size_t BlockInts  = 16U;
   static const std::size_t BlockBytes = BlockInts * 4U;
 
-  // TBD add some useful comments
+  // TBD add some comments
   HashBlockType TransformContainer;
 
   std::array<std::uint32_t, 5U> Digest;
@@ -227,7 +227,7 @@ private:
 
   inline void Function4(std::uint32_t& A, std::uint32_t& B, std::uint32_t& C, std::uint32_t& D, std::uint32_t& E, HashBlockType& block, std::size_t n)
   {
-    E += ((B ^ C ^ D)           + sha1_blk(n, block) + 0xCA62C1D6U + Sha1LeftRoate(A, 5U));
+    E += ((B ^ C ^ D) + sha1_blk(n, block) + 0xCA62C1D6U + Sha1LeftRoate(A, 5U));
     B = Sha1LeftRoate(B, 30U);
   }
 
