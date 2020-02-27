@@ -1,5 +1,5 @@
-#ifndef HAH_SHA1_2019_11_30_H_
-  #define HAH_SHA1_2019_11_30_H_
+#ifndef HASH_SHA1_2019_11_30_H_
+  #define HASH_SHA1_2019_11_30_H_
 
   #include <algorithm>
   #include <array>
@@ -233,4 +233,4 @@ private:
 
 };
 
-#endif // HAH_SHA1_2019_11_30_H_
+#endif // HASH_SHA1_2019_11_30_H_
