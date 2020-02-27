@@ -148,7 +148,6 @@ private:
     for(std::size_t i = 0U; i < 16U; ++i)
     {
       Function0(Tmp[0U], Tmp[1U], Tmp[2U], Tmp[3U], Tmp[4U], Block[i]);
-
       std::rotate(Tmp.begin() , Tmp.begin() + 4U, Tmp.end());
     }
 
@@ -174,7 +173,6 @@ private:
     for(std::size_t i = 40U; i < 60U; ++i)
     {
       std::rotate(Tmp.begin() , Tmp.begin() + 4U, Tmp.end());
-
       Function3(Tmp[0U], Tmp[1U], Tmp[2U], Tmp[3U], Tmp[4U], Block, i);
     }
 
