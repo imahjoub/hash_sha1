@@ -42,7 +42,7 @@ public:
 
         BufferToBlock(Buffer, TransformContainer);
 
-        transform(TransformContainer);
+        Transform(TransformContainer);
 
         UpdateCounter += BlockBytes;
 
@@ -67,7 +67,7 @@ public:
 
     // Append original message length
     // This is the last of the 'message padding' steps.
-    // You will now add the 64-bit representation of the original message length, in binary, to the end of the current message.
+    // Now we add the 64-bit representation of the original message length, in binary, to the end of the current message.
     Buffer.push_back(0x80U);
 
     std::size_t OriginaBufferlSize = Buffer.size();
@@ -83,7 +83,7 @@ public:
 
     if(OriginaBufferlSize > BlockBytes - 8U)
     {
-      transform(LocalBlock);
+      Transform(LocalBlock);
       std::fill(LocalBlock.begin(), LocalBlock.end() -2U, 0U);
     }
 
@@ -91,7 +91,7 @@ public:
     LocalBlock[BlockInts - 1U] = static_cast<std::uint32_t>(HashedBitsNumber);
     LocalBlock[BlockInts - 2U] = (HashedBitsNumber >> 32);
 
-    transform(LocalBlock);
+    Transform(LocalBlock);
 
     std::array<uint32_t, 5U> HashResult;
 
@@ -105,10 +105,10 @@ private:
   static const std::size_t BlockInts  = 16U;
   static const std::size_t BlockBytes = BlockInts * 4U;
 
-  // TBD add some comments
   HashBlockType TransformContainer;
 
   std::array<std::uint32_t, 5U> Digest;
+
   std::vector<std::uint32_t>    Buffer;
 
   // Transforms counter
@@ -131,30 +131,32 @@ private:
     return (((Value) << (Bits)) | (((Value) & 0XFFFFFFFFU) >> (32U - (Bits))));
   }
 
-  static std::uint32_t sha1_blk(std::size_t i, HashBlockType& Block)
+  static std::uint32_t Sha1Blk(std::size_t i, HashBlockType& Block)
   {
     Block[i & 15] = Sha1LeftRoate(Block[(i+13)&15] ^ Block[(i+8)&15] ^ Block[(i+2)&15] ^ Block[i&15], 1U);
 
     return Block[i & 15];
   }
 
-  void transform(HashBlockType& Block)
+  void Transform(HashBlockType& TBlock)
   {
-    // Copy Digest[] to tmp transform array
+    // Copy Digest[] to working array "Tmp"
     std::array<std::uint32_t, 5U> Tmp;
+
     std::copy(Digest.cbegin(), Digest.cend(), Tmp.begin());
 
     // SHA1_R0
     for(std::size_t i = 0U; i < 16U; ++i)
     {
-      Function0(Tmp[0U], Tmp[1U], Tmp[2U], Tmp[3U], Tmp[4U], Block[i]);
+      Function0(Tmp[0U], Tmp[1U], Tmp[2U], Tmp[3U], Tmp[4U], TBlock[i]);
+
       std::rotate(Tmp.begin() , Tmp.begin() + 4U, Tmp.end());
     }
 
     // SHA1_R1
     for(std::size_t i = 16U; i < 20U; ++i)
     {
-      Function1(Tmp[0U], Tmp[1U], Tmp[2U], Tmp[3U], Tmp[4U], Block, i);
+      Function1(Tmp[0U], Tmp[1U], Tmp[2U], Tmp[3U], Tmp[4U], TBlock, i);
 
       if(i<19)
       {
@@ -166,21 +168,21 @@ private:
     for(std::size_t i = 20U; i < 40U; ++i)
     {
       std::rotate(Tmp.begin() , Tmp.begin() + 4U, Tmp.end());
-      Function2(Tmp[0U], Tmp[1U], Tmp[2U], Tmp[3U], Tmp[4U], Block, i);
+      Function2(Tmp[0U], Tmp[1U], Tmp[2U], Tmp[3U], Tmp[4U], TBlock, i);
     }
 
     // SHA1_R3
     for(std::size_t i = 40U; i < 60U; ++i)
     {
       std::rotate(Tmp.begin() , Tmp.begin() + 4U, Tmp.end());
-      Function3(Tmp[0U], Tmp[1U], Tmp[2U], Tmp[3U], Tmp[4U], Block, i);
+      Function3(Tmp[0U], Tmp[1U], Tmp[2U], Tmp[3U], Tmp[4U], TBlock, i);
     }
 
     // SHA1_R4
     for(std::size_t i = 60U; i <= 79U; ++i)
     {
       std::rotate(Tmp.begin() , Tmp.begin() + 4U, Tmp.end());
-      Function4(Tmp[0U], Tmp[1U], Tmp[2U], Tmp[3U], Tmp[4U], Block, i);
+      Function4(Tmp[0U], Tmp[1U], Tmp[2U], Tmp[3U], Tmp[4U], TBlock, i);
     }
 
     std::rotate(Tmp.begin() , Tmp.begin() + 4U, Tmp.end());
@@ -206,26 +208,26 @@ private:
 
   inline void Function1(std::uint32_t& A, std::uint32_t& B, std::uint32_t& C, std::uint32_t& D, std::uint32_t& E, HashBlockType& block, std::size_t n)
   {
-    E += ((B & (C ^ D)) ^D) + sha1_blk(n, block) + 0x5A827999U + Sha1LeftRoate(A, 5U);
+    E += ((B & (C ^ D)) ^D) + Sha1Blk(n, block) + 0x5A827999U + Sha1LeftRoate(A, 5U);
     B = Sha1LeftRoate(B, 30U);
   }
 
   inline void Function2(std::uint32_t& A, std::uint32_t& B, std::uint32_t& C, std::uint32_t& D, std::uint32_t& E, HashBlockType& block, std::size_t n)
   {
-    E += ((B ^ C ^ D) + sha1_blk(n, block) + 0x6ED9EBA1U + Sha1LeftRoate(A, 5U));
+    E += ((B ^ C ^ D) + Sha1Blk(n, block) + 0x6ED9EBA1U + Sha1LeftRoate(A, 5U));
     B = Sha1LeftRoate(B, 30U);
   }
 
   inline void Function3(std::uint32_t& A, std::uint32_t& B, std::uint32_t& C, std::uint32_t& D, std::uint32_t& E, HashBlockType& block, std::size_t n)
   {
-    E += ((((B | C)&D) | (B & C)) + sha1_blk(n, block) + 0x8F1BBCDCU + Sha1LeftRoate(A, 5U));
+    E += ((((B | C)&D) | (B & C)) + Sha1Blk(n, block) + 0x8F1BBCDCU + Sha1LeftRoate(A, 5U));
     B = Sha1LeftRoate(B, 30U);
 
   }
 
   inline void Function4(std::uint32_t& A, std::uint32_t& B, std::uint32_t& C, std::uint32_t& D, std::uint32_t& E, HashBlockType& block, std::size_t n)
   {
-    E += ((B ^ C ^ D) + sha1_blk(n, block) + 0xCA62C1D6U + Sha1LeftRoate(A, 5U));
+    E += ((B ^ C ^ D) + Sha1Blk(n, block) + 0xCA62C1D6U + Sha1LeftRoate(A, 5U));
     B = Sha1LeftRoate(B, 30U);
   }
 
