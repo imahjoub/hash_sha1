@@ -19,7 +19,7 @@ The word 'bird' will hash to something that no other word hashes too, but it wil
 If you are given the value of what 'bird' hashes too but you didn't know what made it, you would never be able to find out that 'bird' was the original word.
 
 
-### 3 How To Use:
+### 3. How To Use:
 ****************
 You could use like this:
 
@@ -31,11 +31,11 @@ You could use like this:
 
 	HashObj.Initialize();
 
-2. Call the Update function with a message to hash
+3. Call the Update function with a message to hash
 
 	HashObj.Update(ExampleMessage, ExampleMessage.size());  
 
-3. Get the hash value
+4. Get the hash value
 
 	HashObj.Final();
 	
