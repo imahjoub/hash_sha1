@@ -1,6 +1,6 @@
 *************************************************
-# README file: Sha-1 algorithm
-# Last changes: 2020-03-27     
+## README file: Sha-1 algorithm
+## Last changes: 2020-03-27     
 *************************************************
 
 
@@ -40,5 +40,3 @@ You could use like this:
 	HashObj.Final();
 	
 PS : the repository has also a test file, see this also
-
-[Back To The Top](#read-me-template)
