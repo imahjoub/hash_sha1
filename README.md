@@ -37,6 +37,4 @@ You could use like this:
 
 4. Get the hash value
 
-	HashObj.Final();
-	
-PS : the repository has also a test file, see this also
+	HashObj.Final();	
