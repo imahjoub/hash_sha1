@@ -1,10 +1,9 @@
 hash_sha1
 =====================
 
-## 1. Definition:
 SHA-1 or Secure Hash Algorithm 1 is a cryptographic hash function which takes an input and produces a 160-bit (20-byte) hash value.
 
-## 2. How To Use:
+## How To Use:
 
 You could use like this:
 
