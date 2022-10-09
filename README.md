@@ -34,3 +34,6 @@ HashObj.Update(ExampleMessage, ExampleMessage.size());
 ```cpp
 HashObj.Final();	
 ```
+
+## Testing, continuous integration and quality
+TBD
