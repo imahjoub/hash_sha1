@@ -1,5 +1,5 @@
 #-------------------------------------------------------------------------------
-# Name:        test_hash_sha256_emulator.py
+# Name:        test_hash_sha1_emulator.py
 # Purpose:
 #
 # Created:     21/09/2022

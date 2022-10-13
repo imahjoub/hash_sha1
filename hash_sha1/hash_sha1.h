@@ -84,7 +84,7 @@
       }
 
       // Append to the padding the total message's length in bits and transform.
-      bitlen += static_cast<std::uint64_t>(datalen * UINT8_C(8));
+      bitlen   += static_cast<std::uint64_t>(datalen * UINT8_C(8));
 
       data[63U] = static_cast<std::uint8_t>(bitlen >> UINT8_C( 0));
       data[62U] = static_cast<std::uint8_t>(bitlen >> UINT8_C( 8));
@@ -129,7 +129,10 @@
 
       for(std::size_t i = 0U, j = 0U; i < 16U; ++i, j += 4U)
       {
-        m[i] = (data[j] << 24U) + (data[j + 1U] << 16U) + (data[j + 2U] << 8U) + (data[j + 3U]);
+        m[i] = static_cast<std::uint32_t>(  static_cast<std::uint32_t>(data[j +  0] << 24U)
+                                          + static_cast<std::uint32_t>(data[j + 1U] << 16U)
+                                          + static_cast<std::uint32_t>(data[j + 2U] << 8U)
+                                          + static_cast<std::uint32_t>(data[j + 3U] << 0U));
       }
 
       for(std::size_t i = 16U; i < 80U; ++i)
@@ -176,7 +179,6 @@
     {
       return (static_cast<std::uint32_t>(x & y) ^ static_cast<std::uint32_t>(~x & z));
     }
-
   };
 
 #endif // HASH_SHA1_2019_11_30_H

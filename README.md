@@ -18,12 +18,12 @@ A simple implementation of SHA-1 in C++ (header-only). This implementation uses 
 
 
 
-## Using the `hash_sha256`
+## Using the `hash_sha1`
 
   * The following program shows a test example
 
   ```cpp
-  // Create an object of hash_sha256
+  // Create an object of hash_sha1
   hash_sha1 hash1;
 
   // Original message
@@ -45,13 +45,13 @@ Various OS/compiler combinations are used including
 GCC/clang/MSVC.
 
 Code coverage uses GCC/gcov/lcov and has a
-quality-gate with comparison/baseline-check provided by third-party [Codecov](https://app.codecov.io/gh/imahjoub/hash_sha256).
+quality-gate with comparison/baseline-check provided by third-party [Codecov](https://app.codecov.io/gh/imahjoub/hash_sha1).
 
 Additional quality checks are performed on pull-request
 and merge to master using modern third party open-source services.
 These include
-[LGTM](https://lgtm.com/projects/g/imahjoub/hash_sha256/alerts/?mode=list)
-and [CodeSonar](https://sonarcloud.io/summary/new_code?id=imahjoub_hash_sha256).
+[LGTM](https://lgtm.com/projects/g/imahjoub/hash_sha1/alerts/?mode=list)
+and [CodeSonar](https://sonarcloud.io/summary/new_code?id=imahjoub_hash_sha1).
 
 
 ## References
