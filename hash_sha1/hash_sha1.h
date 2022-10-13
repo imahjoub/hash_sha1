@@ -45,7 +45,7 @@
 
     auto sha1_update(const std::uint8_t* msg, const std::size_t length) -> void
     {
-      for(size_t i = 0U; i < length; ++i)
+      for(std::size_t i = 0U; i < length; ++i)
       {
         data[datalen] = msg[i];
 
@@ -119,7 +119,7 @@
     std::array<std::uint32_t, 4U> k;
     std::array<std::uint32_t, 5U> init_hash_val;
 
-    void sha1_transform(const std::uint8_t* data)
+    auto sha1_transform(const std::uint8_t* data) -> void
     {
       std::uint32_t tmp1 = 0U;
       std::uint32_t tmp2 = 0U;
@@ -145,10 +145,10 @@
 
       for(std::size_t i = 0U; i < 80U; ++i)
       {
-        if(            i < 20U) { tmp2 = ch(state[1U], state[2U], state[3U])  + k[0U]; }
-        if(20U <= i && i < 40U) { tmp2 = (state[1U] ^ state[2U] ^ state[3U])  + k[1U]; }
-        if(40U <= i && i < 60U) { tmp2 = maj(state[1U], state[2U], state[3U]) + k[2U]; }
-        if(60U <= i && i < 80U) { tmp2 = (state[1U] ^ state[2U] ^ state[3U])  + k[3U]; }
+        if(            i < 20U) { tmp2 =   ch(state[1U], state[2U], state[3U]) + k[0U]; }
+        if(20U <= i && i < 40U) { tmp2 = bxor(state[1U], state[2U], state[3U]) + k[1U]; }
+        if(40U <= i && i < 60U) { tmp2 =  maj(state[1U], state[2U], state[3U]) + k[2U]; }
+        if(60U <= i && i < 80U) { tmp2 = bxor(state[1U], state[2U], state[3U]) + k[3U]; }
 
         tmp1      = rotl(state[0U], 5U) + tmp2 + state[4U] + m[i];
         state[4U] = state[3U];
@@ -178,6 +178,11 @@
     static inline auto ch(std::uint32_t x, std::uint32_t y, std::uint32_t z) -> std::uint32_t
     {
       return (static_cast<std::uint32_t>(x & y) ^ static_cast<std::uint32_t>(~x & z));
+    }
+
+    static inline auto bxor(std::uint32_t x, std::uint32_t y, std::uint32_t z) -> std::uint32_t
+    {
+      return (static_cast<std::uint32_t>(x) ^ static_cast<std::uint32_t>(y) ^ static_cast<std::uint32_t>(z));
     }
   };
 
