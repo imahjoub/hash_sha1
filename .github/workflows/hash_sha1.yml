@@ -1,0 +1,134 @@
+# -----------------------------------------------------
+#  Copyright Iliass Mahjoub 2022.                     
+#  Distributed under the Boost Software License,      
+#  Version 1.0. (See accompanying file LICENSE_1_0.txt
+#  or copy at http://www.boost.org/LICENSE_1_0.txt)   
+# -----------------------------------------------------
+
+name: hash_sha1
+on:
+  push:
+    branches:
+      - '**'
+  pull_request:
+jobs:
+  gcc-clang-native:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    strategy:
+      fail-fast: false
+      matrix:
+        standard: [ c++17, c++2a ]
+        compiler: [ g++, clang++ ]
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: '0'
+      - name: gcc-clang-native
+        run: |
+          echo "gcc-clang-native"
+          echo "${{ matrix.compiler }} -Werror -Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -O3 -std=${{ matrix.standard }} hash_sha1_test.cpp -DHASH_HASH256_PC -I. -o hash_sha1.exe"
+          ${{ matrix.compiler }} -Werror -Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -O3 -std=${{ matrix.standard }} hash_sha1_test.cpp -DHASH_HASH256_PC -I. -o hash_sha1.exe
+          echo "ls ./hash_sha1.exe"
+          ls -la ./hash_sha1.exe
+          ./hash_sha1.exe
+  apple-gcc-clang-native:
+    runs-on: macos-latest
+    defaults:
+      run:
+        shell: bash
+    strategy:
+      fail-fast: false
+      matrix:
+        standard: [ c++17, c++2a ]
+        compiler: [ g++, clang++ ]
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: '0'
+      - name: apple-gcc-clang-native
+        run: |
+          echo "apple-gcc-clang-native"
+          echo "${{ matrix.compiler }} -Werror -Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -O3 -std=${{ matrix.standard }} hash_sha1_test.cpp -DHASH_HASH256_PC -I. -o hash_sha1.exe"
+          ${{ matrix.compiler }} -Werror -Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -O3 -std=${{ matrix.standard }} hash_sha1_test.cpp -DHASH_HASH256_PC -I. -o hash_sha1.exe
+          echo "ls ./hash_sha1.exe"
+          ls -la ./hash_sha1.exe
+          ./hash_sha1.exe
+  msvc-release-x64:
+    runs-on: windows-2022
+    strategy:
+      fail-fast: false
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: '0'
+      - uses: ilammy/msvc-dev-cmd@v1
+      - name: msvc-release-x64
+        shell: cmd
+        run: |
+          set INCLUDE=%cd%;%INCLUDE%
+          set CL=/DHASH_HASH256_PC
+          MSBuild -m hash_sha1.sln -p:useenv=true -p:Configuration=Release -p:Platform=x64 /t:Rebuild
+          dir %cd%\Out\Bin\Release\hash_sha1.exe
+          %cd%\Out\Bin\Release\hash_sha1.exe
+  gnumake-clang-tidy-12-native:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    strategy:
+      fail-fast: false
+      matrix:
+        standard: [ c++20 ]
+        compiler: [ g++, clang++ ]
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: '0'
+      - name: update-tools
+        run:
+          sudo apt install clang clang-tidy
+      - name: gnumake-clang-tidy-12-native
+        run: |
+          echo "+++ print clang-tidy version"
+          clang-tidy --version
+          echo "+++ running clang-tidy"
+          clang-tidy -checks="*,-cppcoreguidelines-avoid-magic-numbers,-readability-magic-numbers,-llvm-header-guard,-cppcoreguidelines-pro-bounds-constant-array-index,-fuchsia-trailing-return,-readability-identifier-naming" hash_sha1_test.cpp -- -I. -DHASH_HASH256_PC
+  stm32f429-qemu:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: '0'
+      - name: update-tools
+        run: |
+          sudo apt install libncurses5 libpython2.7
+          mkdir -p emu_env && cd emu_env
+          wget --no-check-certificate https://armkeil.blob.core.windows.net/developer/Files/downloads/gnu-rm/10.3-2021.10/gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2
+          tar -xvf gcc-arm-none-eabi-10.3-2021.10-x86_64-linux.tar.bz2
+          wget --no-check-certificate https://github.com/xpack-dev-tools/qemu-arm-xpack/releases/download/v2.8.0-13/xpack-qemu-arm-2.8.0-13-linux-x64.tar.gz
+          tar -xvzf xpack-qemu-arm-2.8.0-13-linux-x64.tar.gz
+        working-directory: .
+      - name: build-hash_sha1-stm32f429
+        run: |
+          mkdir -p bin
+          emu_env/gcc-arm-none-eabi-10.3-2021.10/bin/arm-none-eabi-g++ -std=c++20 -Wall -Wextra -pedantic -O0 -g -gdwarf-2 -ffunction-sections -DHASH_HASH256_QEMU -fdata-sections -x c++ -fno-rtti -fno-use-cxa-atexit -fno-exceptions -fno-nonansi-builtins -fno-threadsafe-statics -fno-enforce-eh-specs -ftemplate-depth=32 -mcpu=cortex-m4 -mtune=cortex-m4 -mthumb -mfloat-abi=soft -mno-unaligned-access -mno-long-calls -I. hash_sha1_test.cpp ./qemu_build/stm32f429_startup.cpp -nostartfiles -Wl,--gc-sections -Wl,-Map,./bin/hash_sha1_test.map -T ./qemu_build/stm32f429.ld --specs=nano.specs --specs=nosys.specs -o ./bin/hash_sha1_test.elf
+          emu_env/gcc-arm-none-eabi-10.3-2021.10/bin/arm-none-eabi-objcopy ./bin/hash_sha1_test.elf -O ihex ./bin/hash_sha1_test.hex
+          ls -la ./bin/hash_sha1_test.elf ./bin/hash_sha1_test.hex ./bin/hash_sha1_test.map
+        working-directory: .
+      - name: emulate-target-stm32f429
+        run: |
+          ./emu_env/xpack-qemu-arm-2.8.0-13/bin/qemu-system-gnuarmeclipse --verbose --mcu STM32F429ZI --nographic --gdb tcp::9999 -d unimp,guest_errors &
+        working-directory: .
+      - name: run-test-on-target
+        run: |
+          ./emu_env/gcc-arm-none-eabi-10.3-2021.10/bin/arm-none-eabi-gdb-py ./bin/hash_sha1_test.elf -x ./qemu_build/test_hash_sha1_emulator.py
+          qemu_result=$?
+          echo "qemu_result" "$qemu_result"
+          echo "qemu_result" "$qemu_result" | grep 'qemu_result 0'
+        working-directory: .

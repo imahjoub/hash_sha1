@@ -8,7 +8,7 @@
 ///////////////////////////////////////////////////////////////////
 
 #include <iostream>
-#include "sha1.h"
+#include <hash_sha1/hash_sha1.h>
 
 auto hash_sha1_test1() -> bool
 {

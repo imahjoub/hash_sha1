@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32526.322
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "hash_sha1", "hash_sha1.vcxproj", "{0847B12D-127E-4773-A631-7B6995F5AEBC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{378E6274-F1DA-441A-A8A9-2C54C430352D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{4C73F908-5094-43CF-9428-969D2C1E52B5}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\hash_sha1.yml = .github\workflows\hash_sha1.yml
+		.github\workflows\hash_sha1_codecov.yml = .github\workflows\hash_sha1_codecov.yml
+		.github\workflows\hash_sha1_sonar.yml = .github\workflows\hash_sha1_sonar.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_doc", "_doc", "{C772081E-6EC6-47E0-BFE6-4F79403153A0}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "qemu_build", "qemu_build", "{509CF8A0-D7D2-4EC0-9908-8A5DFF5529CB}"
+	ProjectSection(SolutionItems) = preProject
+		qemu_build\stm32f429.ld = qemu_build\stm32f429.ld
+		qemu_build\stm32f429_startup.cpp = qemu_build\stm32f429_startup.cpp
+		qemu_build\test_hash_sha1_emulator.py = qemu_build\test_hash_sha1_emulator.py
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0847B12D-127E-4773-A631-7B6995F5AEBC}.Debug|x64.ActiveCfg = Debug|x64
+		{0847B12D-127E-4773-A631-7B6995F5AEBC}.Debug|x64.Build.0 = Debug|x64
+		{0847B12D-127E-4773-A631-7B6995F5AEBC}.Release|x64.ActiveCfg = Release|x64
+		{0847B12D-127E-4773-A631-7B6995F5AEBC}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4C73F908-5094-43CF-9428-969D2C1E52B5} = {378E6274-F1DA-441A-A8A9-2C54C430352D}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6D3105D6-1DC9-4433-8544-523CE444B2A5}
+	EndGlobalSection
+EndGlobal

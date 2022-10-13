@@ -1,0 +1,46 @@
+# -----------------------------------------------------
+#  Copyright Iliass Mahjoub 2022.                     
+#  Distributed under the Boost Software License,      
+#  Version 1.0. (See accompanying file LICENSE_1_0.txt
+#  or copy at http://www.boost.org/LICENSE_1_0.txt)   
+# -----------------------------------------------------
+
+name: hash_sha256_codecov
+on:
+  push:
+    branches:
+      - '**'
+  pull_request:
+jobs:
+  gnumake-gcc-gcov-native:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    strategy:
+      fail-fast: false
+      matrix:
+        standard: [ c++17 ]
+        compiler: [ g++ ]
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: '0'
+      - name: update-tools
+        run: sudo apt install lcov
+      - name: gnumake-gcc-gcov-native
+        run: |
+          echo "build and run gcov/lcov/genhtml"
+          g++ -x c++ -c -mtune=native -march=native -O2 -Wall -Wextra -Wconversion -Wsign-conversion -std=c++17 -fno-inline-functions -fprofile-arcs -ftest-coverage hash_sha256_test.cpp -DHASH_HASH256_PC -DSTD_HASH256_GDB -I. -o hash_sha256_test.o
+          g++ -mtune=native -march=native -O2 -Wall -Wextra -Wconversion -Wsign-conversion -std=c++17 -fno-inline-functions -fprofile-arcs -ftest-coverage hash_sha256_test.o -o hash_sha256.exe
+          ./hash_sha256.exe
+          gcov --object-directory . --demangled-names ./hash_sha256_test.cpp
+          lcov -c --directory . --output-file coverage_unfiltered.info
+          lcov --remove coverage_unfiltered.info '/usr/*' --output-file coverage.info
+      - name: upload-codecov
+        uses: codecov/codecov-action@v2
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: coverage.info
+          fail_ci_if_error: true
+          functionalities: fix
