@@ -58,8 +58,8 @@ quality-gate with comparison/baseline-check provided by third-party [Codecov](ht
 Additional quality checks are performed on pull-request
 and merge to master using modern third party open-source services.
 These include
-[LGTM](https://lgtm.com/projects/g/imahjoub/hash_sha1/alerts/?mode=list)
-and [CodeSonar](https://sonarcloud.io/summary/new_code?id=imahjoub_hash_sha1).
+[CodeSonar](https://sonarcloud.io/summary/new_code?id=imahjoub_hash_sha1).
+[Codacy](https://app.codacy.com/gh/imahjoub/hash_sha1).
 
 
 ## References
