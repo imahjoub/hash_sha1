@@ -7,7 +7,11 @@
 //                                                               //
 ///////////////////////////////////////////////////////////////////
 
+#ifdef HASH_HASH1_PC
 #include <iostream>
+#include <cstring>
+#endif // HASH_HASH1_PC
+
 #include <hash_sha1/hash_sha1.h>
 
 auto hash_sha1_test1() -> bool
