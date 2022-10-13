@@ -1,6 +1,17 @@
 hash_sha1
 =====================
+
 <p align="center">
+    <a href="https://github.com/imahjoub/hash_sha1/actions">
+        <img src="https://github.com/imahjoub/hash_sha1/actions/workflows/hash_sha1.yml/badge.svg" alt="Build Status"></a>
+    <a href="https://github.com/imahjoub/hash_sha1/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc">
+        <img src="https://custom-icon-badges.herokuapp.com/github/issues-raw/imahjoub/hash_sha1?logo=github" alt="Issues" /></a>
+    <a href="https://app.codacy.com/gh/imahjoub/hash_sha1/dashboard">
+        <img src="https://app.codacy.com/project/badge/Grade/913aec26f468405ab0ff9a29beb6d400" alt="Codacy Badge" /></a>
+    <a href="https://sonarcloud.io/summary/new_code?id=imahjoub_hash_sha1">
+        <img src="https://sonarcloud.io/api/project_badges/measure?project=imahjoub_hash_sha1&metric=alert_status" alt="Quality Gate Status"></a>
+    <a href="https://codecov.io/gh/imahjoub/hash_sha1">
+        <img src="https://codecov.io/gh/imahjoub/hash_sha1/branch/main/graph/badge.svg?token=3LIK8E96FC" alt="code coverage"></a>
     <a href="https://github.com/imahjoub/hash_sha1" alt="GitHub code size in bytes">
         <img src="https://img.shields.io/github/languages/code-size/imahjoub/hash_sha1" /></a>
     <a href="https://github.com/imahjoub/hash_sha1/blob/main/LICENSE_1_0.txt">
@@ -14,9 +25,6 @@ A simple implementation of SHA-1 in C++ (header-only). This implementation uses 
 ## Characteristics of the SHA-1 Algorithm
 
   * SHA-1 is an unkeyed cryptographic hashing function that takes an input of variable length and produces a 120-bit long hash output
-
-
-
 
 ## Using the `hash_sha1`
 

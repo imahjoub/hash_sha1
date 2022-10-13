@@ -72,9 +72,9 @@
       if(datalen < 56U)
       {
         data[i++] = 0x80U;
-
        std::fill((data.begin() + i), (data.begin() + 56U), 0U);
       }
+
       else
       {
         data[i++] = 0x80U;
@@ -145,7 +145,7 @@
 
       for(std::size_t i = 0U; i < 80U; ++i)
       {
-        if(0U  <= i && i < 20U) { tmp2 = ch(state[1U], state[2U], state[3U])  + k[0U]; }
+        if(            i < 20U) { tmp2 = ch(state[1U], state[2U], state[3U])  + k[0U]; }
         if(20U <= i && i < 40U) { tmp2 = (state[1U] ^ state[2U] ^ state[3U])  + k[1U]; }
         if(40U <= i && i < 60U) { tmp2 = maj(state[1U], state[2U], state[3U]) + k[2U]; }
         if(60U <= i && i < 80U) { tmp2 = (state[1U] ^ state[2U] ^ state[3U])  + k[3U]; }
