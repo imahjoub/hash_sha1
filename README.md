@@ -9,31 +9,51 @@ hash_sha1
         <img src="https://img.shields.io/github/commit-activity/y/imahjoub/hash_sha1" /></a>
 </p>
 
-SHA-1 or Secure Hash Algorithm 1 is a cryptographic hash function which takes an input and produces a 160-bit (20-byte) hash value.
+A simple implementation of SHA-1 in C++ (header-only). This implementation uses little endian byte order.
 
-## How To Use:
+## Characteristics of the SHA-256 Algorithm
 
-You could use like this:
+  * SHA-1 is an unkeyed cryptographic hashing function that takes an input of variable length and produces a 120-bit long hash output
 
-1. Create a hash object 
-```cpp
-SHA1 HashObj
-```
 
-2. Call the initialise function 
-```cpp
-HashObj.Initialize();
-```
 
-3. Call the Update function with a message to hash
-```cpp
-HashObj.Update(ExampleMessage, ExampleMessage.size());  
-```
 
-4. Get the hash value
-```cpp
-HashObj.Final();	
-```
+## Using the `hash_sha256`
+
+  * The following program shows a test example
+
+  ```cpp
+  // Create an object of hash_sha256
+  hash_sha1 hash1;
+
+  // Original message
+  const std::array<std::uint8_t, 3U> msg1 = {'a', 'b', 'c' };
+
+  // Initialize hash
+  hash1.sha1_init();
+
+  // Update the hash with given data
+    hash1.sha1_update(msg1.data(), msg1.size());
+
+  // Final hash result
+  sha1_output_type hash_result1 = hash1.sha1_final();
+  ```
 
 ## Testing, continuous integration and quality
-TBD
+Testing and continuous integration runs on GitHub Actions.
+Various OS/compiler combinations are used including
+GCC/clang/MSVC.
+
+Code coverage uses GCC/gcov/lcov and has a
+quality-gate with comparison/baseline-check provided by third-party [Codecov](https://app.codecov.io/gh/imahjoub/hash_sha256).
+
+Additional quality checks are performed on pull-request
+and merge to master using modern third party open-source services.
+These include
+[LGTM](https://lgtm.com/projects/g/imahjoub/hash_sha256/alerts/?mode=list)
+and [CodeSonar](https://sonarcloud.io/summary/new_code?id=imahjoub_hash_sha256).
+
+
+## References
+Algorithm specification can be found here:
+* http://csrc.nist.gov/publications/fips/fips180-2/fips180-2withchangenotice.pdf
