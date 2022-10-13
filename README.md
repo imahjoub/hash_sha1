@@ -11,7 +11,7 @@ hash_sha1
     <a href="https://sonarcloud.io/summary/new_code?id=imahjoub_hash_sha1">
         <img src="https://sonarcloud.io/api/project_badges/measure?project=imahjoub_hash_sha1&metric=alert_status" alt="Quality Gate Status"></a>
     <a href="https://codecov.io/gh/imahjoub/hash_sha1">
-        <img src="https://codecov.io/gh/imahjoub/hash_sha1/branch/main/graph/badge.svg?token=3LIK8E96FC" alt="code coverage"></a>
+        <img src="https://codecov.io/gh/imahjoub/hash_sha1/branch/master/graph/badge.svg?token=EE28IC5E6T" alt="code coverage"></a>
     <a href="https://github.com/imahjoub/hash_sha1" alt="GitHub code size in bytes">
         <img src="https://img.shields.io/github/languages/code-size/imahjoub/hash_sha1" /></a>
     <a href="https://github.com/imahjoub/hash_sha1/blob/main/LICENSE_1_0.txt">
