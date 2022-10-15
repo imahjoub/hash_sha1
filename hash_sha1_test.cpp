@@ -110,7 +110,6 @@ auto main() -> int
                        && hash_sha1_get_gdb_result());
 
   std::cout << "hash_result_is_ok: " << std::boolalpha << hash_result_is_ok << std::endl;
-
   #endif // HASH_HASH1_QEMU
 
   return hash_result_is_ok ? 0 : -1;
