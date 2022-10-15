@@ -43,9 +43,9 @@
       init_hash_val[4U] = UINT32_C(0xC3D2E1F0);
     }
 
-    auto sha1_update(const std::uint8_t* msg, const std::size_t length) -> void
+    auto sha1_update(const std::uint8_t* msg, const std::size_t msg_length) -> void
     {
-      for(std::size_t i = 0U; i < length; ++i)
+      for(std::size_t i = 0U; i < msg_length; ++i)
       {
         data[datalen] = msg[i];
 
