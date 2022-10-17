@@ -22,10 +22,6 @@ hash_sha1
 
 A simple implementation of SHA-1 in C++ (header-only). This implementation uses little endian byte order.
 
-## Characteristics of the SHA-1 Algorithm
-
-  * SHA-1 is an unkeyed cryptographic hashing function that takes an input of variable length and produces a 120-bit long hash output
-
 ## Using the `hash_sha1`
 
   * The following program shows a test example
