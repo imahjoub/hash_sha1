@@ -53,7 +53,7 @@
 
         if(datalen == 64U)
         {
-          sha1_transform(data.data());
+          sha1_transform();
           datalen = 0U;
           bitlen += 512U;
         }
@@ -79,7 +79,7 @@
       {
         data[i++] = 0x80U;
         std::fill((data.begin() + i), data.end(), 0U);
-        sha1_transform(data.data());
+        sha1_transform();
         std::fill_n(data.begin(), 56U, 0U);
       }
 
@@ -95,7 +95,7 @@
       data[57U] = static_cast<std::uint8_t>(bitlen >> UINT8_C(48));
       data[56U] = static_cast<std::uint8_t>(bitlen >> UINT8_C(56));
 
-      sha1_transform(data.data());
+      sha1_transform();
 
       // Since this implementation uses little endian byte ordering and MD uses big endian,
       // reverse all the bytes when copying the final init_hash_val to the output hash.
@@ -119,7 +119,7 @@
     std::array<std::uint8_t, 64U> data;
     std::array<std::uint32_t, 5U> init_hash_val;
 
-    auto sha1_transform(const std::uint8_t* data) -> void
+    auto sha1_transform() -> void
     {
       std::uint32_t tmp1 = 0U;
       std::uint32_t tmp2 = 0U;
