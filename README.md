@@ -37,7 +37,7 @@ A simple implementation of SHA-1 in C++ (header-only). This implementation uses 
   hash1.sha1_init();
 
   // Update the hash with given data
-    hash1.sha1_update(msg1.data(), msg1.size());
+  hash1.sha1_update(msg1.data(), msg1.size());
 
   // Final hash result
   sha1_output_type hash_result1 = hash1.sha1_final();
