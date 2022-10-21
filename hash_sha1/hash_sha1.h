@@ -99,13 +99,13 @@
 
       // Since this implementation uses little endian byte ordering and MD uses big endian,
       // reverse all the bytes when copying the final init_hash_val to the output hash.
-      for(std::size_t i = 0U; i < 4U; ++i)
+      for(std::size_t j = 0U; j < 4U; ++j)
       {
-        hash_result[i +  0U] = ((init_hash_val[0U] >> (24U - (i * 8U))) & UINT32_C(0x000000FF));
-        hash_result[i +  4U] = ((init_hash_val[1U] >> (24U - (i * 8U))) & UINT32_C(0x000000FF));
-        hash_result[i +  8U] = ((init_hash_val[2U] >> (24U - (i * 8U))) & UINT32_C(0x000000FF));
-        hash_result[i + 12U] = ((init_hash_val[3U] >> (24U - (i * 8U))) & UINT32_C(0x000000FF));
-        hash_result[i + 16U] = ((init_hash_val[4U] >> (24U - (i * 8U))) & UINT32_C(0x000000FF));
+        hash_result[j +  0U] = ((init_hash_val[0U] >> (24U - (j * 8U))) & UINT32_C(0x000000FF));
+        hash_result[j +  4U] = ((init_hash_val[1U] >> (24U - (j * 8U))) & UINT32_C(0x000000FF));
+        hash_result[j +  8U] = ((init_hash_val[2U] >> (24U - (j * 8U))) & UINT32_C(0x000000FF));
+        hash_result[j + 12U] = ((init_hash_val[3U] >> (24U - (j * 8U))) & UINT32_C(0x000000FF));
+        hash_result[j + 16U] = ((init_hash_val[4U] >> (24U - (j * 8U))) & UINT32_C(0x000000FF));
       }
 
       return hash_result;
