@@ -39,7 +39,7 @@ A simple implementation of SHA-1 in C++ (header-only). This implementation uses 
   // Update the hash with given data
   hash1.sha1_update(msg1.data(), msg1.size());
 
-  // Final hash result
+  // Get hash result
   sha1_output_type hash_result1 = hash1.sha1_final();
   ```
 
@@ -54,8 +54,7 @@ quality-gate with comparison/baseline-check provided by third-party [Codecov](ht
 Additional quality checks are performed on pull-request
 and merge to master using modern third party open-source services.
 These include
-[CodeSonar](https://sonarcloud.io/summary/new_code?id=imahjoub_hash_sha1).
-[Codacy](https://app.codacy.com/gh/imahjoub/hash_sha1).
+[CodeSonar](https://sonarcloud.io/summary/new_code?id=imahjoub_hash_sha1) and [Codacy](https://app.codacy.com/gh/imahjoub/hash_sha1).
 
 
 ## References
