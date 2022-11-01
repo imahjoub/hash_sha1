@@ -25,7 +25,7 @@
     virtual ~hash_sha1()        = default; // LCOV_EXCL_LINE
 
     auto operator=(const hash_sha1&) -> hash_sha1& = delete;
-    auto operator=(hash_sha1&&) -> hash_sha1&      = delete;
+    auto operator=(hash_sha1&&)      -> hash_sha1& = delete;
 
     auto sha1_init() -> void
     {
@@ -72,7 +72,7 @@
       if(datalen < 56U)
       {
         data[i++] = 0x80U;
-       std::fill((data.begin() + i), (data.begin() + 56U), 0U);
+        std::fill((data.begin() + i), (data.begin() + 56U), 0U);
       }
 
       else
@@ -124,15 +124,17 @@
       std::uint32_t tmp1 = 0U;
       std::uint32_t tmp2 = 0U;
 
-      std::array<std::uint32_t, 80U> m    = {0U};
-      std::array<std::uint32_t, 5U> state = {0U};
+      std::array<std::uint32_t, 80U> m     = {0U};
+      std::array<std::uint32_t,  5U> state = {0U};
 
       for(std::size_t i = 0U, j = 0U; i < 16U; ++i, j += 4U)
       {
-        m[i] = static_cast<std::uint32_t>(  static_cast<std::uint32_t>(data[j + 0U] << 24U)
-                                          + static_cast<std::uint32_t>(data[j + 1U] << 16U)
-                                          + static_cast<std::uint32_t>(data[j + 2U] <<  8U)
-                                          + static_cast<std::uint32_t>(data[j + 3U] << 0U));
+        m[i] = static_cast<std::uint32_t>
+        (   static_cast<std::uint32_t>(data[j + 0U] << 24U)
+          + static_cast<std::uint32_t>(data[j + 1U] << 16U)
+          + static_cast<std::uint32_t>(data[j + 2U] <<  8U)
+          + static_cast<std::uint32_t>(data[j + 3U] <<  0U)
+        );
       }
 
       for(std::size_t i = 16U; i < 80U; ++i)
