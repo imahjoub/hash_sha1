@@ -24,8 +24,8 @@
     hash_sha1(hash_sha1&&)      = delete;
     virtual ~hash_sha1()        = default; // LCOV_EXCL_LINE
 
-    auto operator=(const hash_sha1&) -> hash_sha1& = delete;
     auto operator=(hash_sha1&&)      -> hash_sha1& = delete;
+    auto operator=(const hash_sha1&) -> hash_sha1& = delete;
 
     auto sha1_init() -> void
     {
