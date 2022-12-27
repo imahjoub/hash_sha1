@@ -7,7 +7,7 @@ hash_sha1
     <a href="https://github.com/imahjoub/hash_sha1/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc">
         <img src="https://custom-icon-badges.herokuapp.com/github/issues-raw/imahjoub/hash_sha1?logo=github" alt="Issues" /></a>
     <a href="https://github.com/imahjoub/hash_sha1/actions/workflows/hash_sha1_codeql.yml">
-        <img src="https://github.com/imahjoub/hash_sha1/actions/workflows/codeql.yml/badge.svg" alt="CodeQL"></a>
+        <img src="https://github.com/imahjoub/hash_sha1/actions/workflows/hash_sha1_codeql.yml/badge.svg" alt="CodeQL"></a>
     <a href="https://app.codacy.com/gh/imahjoub/hash_sha1/dashboard">
         <img src="https://app.codacy.com/project/badge/Grade/913aec26f468405ab0ff9a29beb6d400" alt="Codacy Badge" /></a>
     <a href="https://sonarcloud.io/summary/new_code?id=imahjoub_hash_sha1">
