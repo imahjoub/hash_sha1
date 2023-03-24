@@ -32,19 +32,19 @@ A simple implementation of SHA-1 in C++ (header-only). This implementation uses 
 
   ```cpp
   // Create an object of hash_sha1
-  hash_sha1 hash1;
+  hash_sha1 hash;
 
   // Original message
-  const std::array<std::uint8_t, 3U> msg1 = {'a', 'b', 'c' };
+  const std::array<std::uint8_t, 3U> msg = {'a', 'b', 'c' };
 
   // Initialize hash
-  hash1.sha1_init();
+  hash.sha1_init();
 
   // Update the hash with given data
-  hash1.sha1_update(msg1.data(), msg1.size());
+  hash.sha1_update(msg.data(), msg.size());
 
   // Get hash result
-  sha1_output_type hash_result1 = hash1.sha1_final();
+  sha1_output_type hash_result = hash.sha1_final();
   ```
 
 ## Testing, continuous integration and quality
