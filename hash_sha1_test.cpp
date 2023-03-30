@@ -18,7 +18,7 @@ auto hash_sha1_test1() -> bool
 {
   const std::array<std::uint8_t, 3U> msg1 = {'a', 'b', 'c' };
 
-  sha1_output_type expected_hash1 =
+  sha1_type expected_hash1 =
   {
     0xA9U, 0x99U, 0x3EU, 0x36U, 0x47U, 0x06U,
     0x81U, 0x6AU, 0xBAU, 0x3EU, 0x25U, 0x71U,
@@ -32,7 +32,7 @@ auto hash_sha1_test1() -> bool
 
   hash1.sha1_update(msg1.data(), msg1.size());
 
-  sha1_output_type hash_result1 = hash1.sha1_final();
+  sha1_type hash_result1 = hash1.sha1_final();
 
   return (hash_result1 == expected_hash1);
 }
@@ -56,7 +56,7 @@ auto hash_sha1_test2() -> bool
      "abcdefghijklmnopqrstuvwxyz"
    };
 
-  sha1_output_type expected_hash2 =
+  sha1_type expected_hash2 =
   {
     0xF4U, 0x0DU, 0x9AU, 0xEBU, 0xFFU, 0x1CU,
     0xF2U, 0x6EU, 0xFAU, 0xF0U, 0xB5U, 0x44U,
@@ -70,7 +70,7 @@ auto hash_sha1_test2() -> bool
 
   hash2.sha1_update(msg2, strlen(reinterpret_cast<const char*>(msg2)));
 
-  sha1_output_type hash_result2 = hash2.sha1_final();
+  sha1_type hash_result2 = hash2.sha1_final();
 
   return (hash_result2 == expected_hash2);
 }
