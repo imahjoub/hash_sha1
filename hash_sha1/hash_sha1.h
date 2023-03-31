@@ -14,7 +14,7 @@
   #include <array>
   #include <cstdint>
 
-  using sha1_output_type = std::array<std::uint8_t, 20U>;
+  using sha1_type = std::array<std::uint8_t, 20U>;
 
   class hash_sha1
   {
@@ -60,11 +60,11 @@
       }
     }
 
-    auto sha1_final() -> sha1_output_type
+    auto sha1_final() -> sha1_type
     {
       std::size_t i = 0U;
 
-      sha1_output_type hash_result = {0U};
+      sha1_type hash_result = {0U};
 
       i = datalen;
 
