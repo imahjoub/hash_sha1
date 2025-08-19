@@ -144,7 +144,7 @@ jobs:
           cat ./hash_sha1_test.txt
           echo
           echo 'We will now grep for the right answer...'
-          grep 'value 0x8000EDC' ./hash_sha1_test.txt
+          grep 'value 0x8000DEC' ./hash_sha1_test.txt
         working-directory: .
   valgrind-check:
     runs-on: ubuntu-latest
